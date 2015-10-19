@@ -14,4 +14,5 @@ structure if the name service changes address.
 
 """
 
-name_service_address = ("172.16.5.1", 40000)
+# name_service_address = ("172.16.5.1", 40000)
+name_service_address = ("192.168.1.12", 40000)
