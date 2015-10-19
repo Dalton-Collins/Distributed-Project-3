@@ -102,7 +102,7 @@ class NameService:
 
     def require_all(self, type):
         if type in self.peers:
-            return self.peers[type].values()
+            return self.peers[type]
         else:
             # If there are no matches for this object type, return an empty list
             return []
