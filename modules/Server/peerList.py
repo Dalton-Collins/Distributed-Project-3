@@ -36,34 +36,26 @@ class PeerList(object):
 
         """
 
-        info = 1
-        id = 1
-        address = 0
-
+        print("initializing")
         self.lock.acquire()
         try:
-            #The first element seems to be the address of the nameservice
             peer_master = self.owner.name_service.require_all("peer_object")[1:]
-            peer_list = [peer for peer in peer_master
-                         if peer[info][id] > self.owner.id]
+            for peer in peer_master:
+                self.register_peer(peer[0], peer[1])
 
-            for peer in peer_list:
-                self.owner.register_peer("peer_object", self.owner.address)
-                self.peers[peer[info][id]] = orb.Stub(peer[info][address])
+            # for peer in self.peers.values():
+            #     peer.register_peer(self.owner.id, self.owner.address)
+
         finally:
             self.lock.release()
 
     def destroy(self):
         """Unregister this peer from all others in the list."""
 
-        id = 1
-        info = 1
-
         self.lock.acquire()
         try:
             for peer in self.peers:
-                self.peers[peer[info][id]].unregister_peer(self.owner.id,
-                                                           self.owner.address)
+                peer.unregister_peer(self.owner.id)
 
         finally:
             self.lock.release()
