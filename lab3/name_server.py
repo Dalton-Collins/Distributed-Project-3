@@ -76,7 +76,7 @@ class NameService:
             if type in self.peers:
                 self.peers[type][key] = (id, address)
             else:
-                self.peers[type] = {key: address}
+                self.peers[type] = {key: (id,address)}
             print (id, str(hashcode))
             return (id, str(hashcode))
         except Exception as e:

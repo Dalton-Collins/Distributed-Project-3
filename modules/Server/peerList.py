@@ -36,15 +36,16 @@ class PeerList(object):
 
         """
 
-        print("initializing")
         self.lock.acquire()
         try:
-            peer_master = self.owner.name_service.require_all("peer_object")[1:]
-            for peer in peer_master:
+            peer_master = self.owner.name_service.require_all("peer_object")
+            peer_less = [peer for peer in peer_master if peer[0] < self.owner.id]
+
+            for peer in peer_less:
                 self.register_peer(peer[0], peer[1])
 
-            # for peer in self.peers.values():
-            #     peer.register_peer(self.owner.id, self.owner.address)
+            for peer in self.peers.values():
+                peer.register_peer(self.owner.id, self.owner.address)
 
         finally:
             self.lock.release()

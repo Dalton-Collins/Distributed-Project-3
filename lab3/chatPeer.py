@@ -103,8 +103,6 @@ class Client(orb.Peer):
 # Initialize the client object.
 local_address = (socket.gethostname(), local_port)
 p = Client(local_address, name_service_address, client_type)
-print "Client Initialized"
-
 
 def menu():
     print("""\
@@ -117,7 +115,6 @@ Choose one of the following commands:
 
 command = ""
 cursor = "{}({})> ".format(p.type, p.id)
-print "Menu Incoming"
 menu()
 while command != "q":
     try:
