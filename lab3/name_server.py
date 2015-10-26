@@ -71,7 +71,7 @@ class NameService:
 
             hashcode = hash(str(list))
 
-            key = str((id, hashcode))
+            key = str(id)
 
             if type in self.peers:
                 self.peers[type][key] = (id, address)
@@ -85,7 +85,7 @@ class NameService:
             pass
 
     def unregister(self, id, type, hashcode):
-        key = str((id, hashcode))
+        key = str(id)
 
         try:
             del self.peers[type][key]
