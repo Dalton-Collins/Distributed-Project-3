@@ -104,8 +104,6 @@ class Request(threading.Thread):
             worker = self.conn.makefile(mode="rw")
             request_json = worker.readline()
 
-            print(request_json)
-
             request_dict = json.loads(request_json)
             output = ''
             try:
@@ -121,8 +119,6 @@ class Request(threading.Thread):
                                                        "args": e.args}}))
 
             finally:
-                print(output)
-                print(json.loads(output))
                 worker.write(output)
                 worker.flush()
 
